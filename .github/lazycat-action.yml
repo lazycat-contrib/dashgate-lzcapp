@@ -25,3 +25,12 @@ images:
     delivery:
       mode: mirror
       require_digest_match: true
+stores:
+  official:
+    # 只发布喵喵（私有）商店，不走官方审核
+    enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: DashGate
+    summary: "自托管应用网关：一个面板管理所有服务，支持分组访问控制与应用自动发现"
