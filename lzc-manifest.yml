@@ -1,0 +1,41 @@
+application:
+  subdomain: dashgate
+  multi_instance: false
+  # Setup wizard creates the first admin account on first visit (self-service,
+  # papra/servas precedent) -> public_path.
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://dashgate:1738/
+services:
+  dashgate:
+    # upstream: khak1s/dashgate:1.5.11
+    image: docker.1ms.run/khak1s/dashgate:1.5.11
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - PORT=1738
+      - CONFIG_PATH=/config/config.yaml
+      - DB_PATH=/config/dashgate.db
+      - ICONS_PATH=/config/icons
+      - TZ=Asia/Shanghai
+    binds:
+      - /lzcapp/var/config:/config
+usage: |
+  DashGate 是一个自托管的应用网关/仪表盘：把你的所有 Web 服务收进一个
+  面板，支持按分组控制谁能看到哪个应用，还能从 Docker、Traefik、Nginx
+  等来源自动发现应用。
+
+  首次使用：
+    - 打开应用入口，会进入初始化向导，按提示创建管理员账号
+      （本地认证最简单，之后可配置 LDAP/OIDC）。
+    - 用管理员登录后，在 Settings > Admin > Content 手动添加应用，
+      或在 Discovery 里启用自动发现。
+
+  说明：
+    - Docker 自动发现默认关闭；如需启用，Docker 官方文档建议使用
+      受限 socket 代理而非直接挂载 docker.sock。
+    - 数据（数据库、图标、配置）保存在 /config，随应用持久化。
+    - 本应用基于 MIT 开源。
+    - 未做实机验证。

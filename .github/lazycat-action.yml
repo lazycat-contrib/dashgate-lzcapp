@@ -1,0 +1,27 @@
+version: 1
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: dist/application.lpk
+  target_arch: amd64
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: dashgate
+build:
+  toolchains: []
+  run_buildscript: false
+images:
+  - id: dashgate
+    target: service
+    service: dashgate
+    source: khak1s/dashgate
+    channel: stable
+    sort: semver
+    tag_regex: ^v?[0-9]+[.][0-9]+[.][0-9]+$
+    delivery:
+      mode: mirror
+      require_digest_match: true

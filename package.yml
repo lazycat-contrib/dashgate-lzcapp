@@ -1,0 +1,18 @@
+package: community.lazycat.app.dashgate
+name: DashGate
+description: "Self-hosted application gateway: one dashboard for all your services with group-based access control and auto-discovery."
+version: 1.5.11
+min_os_version: "1.5.0"
+homepage: https://github.com/Kha-kis/dashgate
+author: Khak1s
+license: MIT
+permissions:
+  required:
+    - net.internet
+locales:
+  zh:
+    name: DashGate
+    description: 自托管应用网关：一个面板管理所有服务，支持分组访问控制与应用自动发现。
+  en:
+    name: DashGate
+    description: "Self-hosted application gateway: one dashboard for all your services with group-based access control and auto-discovery."
