@@ -15,6 +15,7 @@ build:
   toolchains: []
   run_buildscript: false
 images:
+  # 上游 Docker Hub 标签为不带 v 前缀的三段 SemVer（1.5.11），直接作为包版本。
   - id: dashgate
     target: service
     service: dashgate
